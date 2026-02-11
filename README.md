@@ -1,6 +1,6 @@
 # Daktela CRM Sync — Raynet Adapter
 
-Raynet CRM adapter for the [daktela/crm-sync](https://github.com/daktela/crm-sync) SDK. Synchronizes contacts, accounts, and activities between Daktela Contact Centre V6 and Raynet CRM.
+Raynet CRM adapter for the [daktela/crm-sync](https://github.com/Daktela/daktela-v6-crm-sync-sdk) SDK. Synchronizes contacts, accounts, and activities between Daktela Contact Centre V6 and Raynet CRM.
 
 ## How It Works
 
@@ -9,7 +9,7 @@ This package provides:
 1. **`RaynetCrmAdapter`** — implements `CrmAdapterInterface` from the SDK, translating between Raynet's nested API responses and the flat entity model the SDK expects.
 2. **`RaynetClient`** — a lightweight Guzzle-based HTTP client that handles Raynet's API quirks (reversed PUT/POST, pagination, auth headers).
 
-All sync orchestration, field mapping, transformations, and batch processing are handled by the shared [daktela/crm-sync](https://github.com/daktela/crm-sync) SDK. This package only deals with Raynet-specific concerns.
+All sync orchestration, field mapping, transformations, and batch processing are handled by the shared [daktela/crm-sync](https://github.com/Daktela/daktela-v6-crm-sync-sdk) SDK. This package only deals with Raynet-specific concerns.
 
 | Entity     | Direction              | Source of truth |
 |------------|------------------------|-----------------|
@@ -41,7 +41,7 @@ Then edit `config/sync.yaml` with your credentials and customize the mapping fil
 
 ### sync.yaml
 
-The `raynet` section is specific to this adapter. See the [SDK configuration docs](https://github.com/daktela/crm-sync/blob/main/docs/02-configuration.md) for the `daktela`, `sync`, and `webhook` sections.
+The `raynet` section is specific to this adapter. See the [SDK configuration docs](https://github.com/Daktela/daktela-v6-crm-sync-sdk/blob/main/docs/02-configuration.md) for the `daktela`, `sync`, and `webhook` sections.
 
 ```yaml
 daktela:
@@ -77,11 +77,11 @@ webhook:
   secret: "${WEBHOOK_SECRET}"
 ```
 
-Use `${ENV_VAR}` placeholders to keep secrets out of version control. The SDK resolves these at load time via `getenv()`. Inline interpolation works too: `"prefix${VAR}suffix"`. See [SDK env var docs](https://github.com/daktela/crm-sync/blob/main/docs/02-configuration.md#environment-variables).
+Use `${ENV_VAR}` placeholders to keep secrets out of version control. The SDK resolves these at load time via `getenv()`. Inline interpolation works too: `"prefix${VAR}suffix"`. See [SDK env var docs](https://github.com/Daktela/daktela-v6-crm-sync-sdk/blob/main/docs/02-configuration.md#environment-variables).
 
 ## Mapping Files
 
-For full field mapping syntax (directions, dot notation, multi-value strategies, relations, transformer chains, custom transformers), see the [SDK field mapping docs](https://github.com/daktela/crm-sync/blob/main/docs/03-field-mapping.md).
+For full field mapping syntax (directions, dot notation, multi-value strategies, relations, transformer chains, custom transformers), see the [SDK field mapping docs](https://github.com/Daktela/daktela-v6-crm-sync-sdk/blob/main/docs/03-field-mapping.md).
 
 Below are the Raynet-specific flattened fields available in mapping files.
 
