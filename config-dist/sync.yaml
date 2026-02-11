@@ -1,0 +1,37 @@
+# Daktela CRM Sync — Raynet Configuration
+#
+# This is the single config file for the sync. Edit values directly here.
+# For production deployments, you can use ${ENV_VAR} placeholders that
+# resolve from environment variables at runtime (e.g. Docker env, k8s secrets).
+
+daktela:
+  instance_url: "https://your-instance.daktela.com"  # or ${DAKTELA_INSTANCE_URL}
+  access_token: "your-daktela-token"                  # or ${DAKTELA_ACCESS_TOKEN}
+
+raynet:
+  api_url: "https://app.raynet.cz/api/v2/"
+  email: "you@example.com"          # or ${RAYNET_EMAIL}
+  api_key: "your-api-key"           # or ${RAYNET_API_KEY}
+  instance_name: "your-instance"    # or ${RAYNET_INSTANCE_NAME}
+  person_type: "person"             # "person" or "contact-person"
+  owner_id: 0                        # Raynet user ID for activity ownership, or ${RAYNET_OWNER_ID}
+
+sync:
+  batch_size: 100
+  entities:
+    contact:
+      enabled: true
+      direction: crm_to_cc
+      mapping_file: "mappings/contacts.yaml"
+    account:
+      enabled: true
+      direction: crm_to_cc
+      mapping_file: "mappings/accounts.yaml"
+    activity:
+      enabled: true
+      direction: cc_to_crm
+      mapping_file: "mappings/activities.yaml"
+      activity_types: [call, email, web, sms, fbm, wap, vbr]
+
+webhook:
+  secret: ""  # or ${WEBHOOK_SECRET}

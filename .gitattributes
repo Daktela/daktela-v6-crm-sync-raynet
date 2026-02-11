@@ -1,0 +1,11 @@
+# Exclude dev/CI files from Composer package (git archive / --prefer-dist)
+/.gitignore export-ignore
+/.phpunit.result.cache export-ignore
+/Dockerfile export-ignore
+/docker-compose.yml export-ignore
+/phpstan.neon export-ignore
+/phpunit.xml export-ignore
+/tests export-ignore
+/var export-ignore
+/composer.phar export-ignore
+/composer-setup.php export-ignore

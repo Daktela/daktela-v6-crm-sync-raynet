@@ -1,0 +1,28 @@
+entity: account
+lookup_field: name
+
+mappings:
+  # Daktela display name ← Raynet company name
+  - source: title
+    target: name
+    direction: crm_to_cc
+
+  # CRM detail URL
+  - source: description
+    target: id
+    direction: crm_to_cc
+    transformers:
+      - name: url
+        params: { template: "https://app.raynet.cz/${RAYNET_INSTANCE_NAME}/?view=DetailView&en=Company&ei={value}" }
+
+  # Daktela unique name ← prefix + Raynet company ID
+  - source: name
+    target: id
+    direction: crm_to_cc
+    transformers:
+      - name: prefix
+        params: { value: "raynet_" }
+
+  - source: customFields.regNumber
+    target: regNumber
+    direction: crm_to_cc

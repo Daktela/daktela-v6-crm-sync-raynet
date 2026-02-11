@@ -1,0 +1,7 @@
+services:
+  php:
+    build: .
+    volumes:
+      - .:/app
+      - ../daktela-v6-php-crm-sync:/daktela-v6-php-crm-sync
+    working_dir: /app

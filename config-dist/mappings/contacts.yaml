@@ -1,0 +1,56 @@
+entity: contact
+lookup_field: name
+
+mappings:
+  # Daktela display name ← Raynet person fullName
+  - source: title
+    target: fullName
+    direction: crm_to_cc
+
+  # Daktela unique name ← prefix + Raynet person ID
+  - source: name
+    target: id
+    direction: crm_to_cc
+    transformers:
+      - name: prefix
+        params: { value: "raynet_person_" }
+
+  # First/last name
+  - source: firstname
+    target: firstName
+    direction: crm_to_cc
+
+  - source: lastname
+    target: lastName
+    direction: crm_to_cc
+
+  # Email as custom field (wrapped in array)
+  - source: customFields.email
+    target: email
+    direction: crm_to_cc
+    transformers:
+      - name: wrap_array
+
+  # Phone as custom field (wrapped in array)
+  - source: customFields.number
+    target: tel1
+    direction: crm_to_cc
+    transformers:
+      - name: wrap_array
+
+  # CRM detail URL
+  - source: description
+    target: id
+    direction: crm_to_cc
+    transformers:
+      - name: url
+        params: { template: "https://app.raynet.cz/${RAYNET_INSTANCE_NAME}/?view=DetailView&en=Person&ei={value}" }
+
+  # Account relation: resolve Raynet company_id → Daktela account name
+  - source: account
+    target: company_id
+    direction: crm_to_cc
+    relation:
+      entity: account
+      resolve_from: id
+      resolve_to: name
